@@ -1,0 +1,47 @@
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+       
+        stack<int > asts;
+        for( int i=0;i<asteroids.size();i++)
+        {
+            if(asts.empty() ||asteroids[i]>0 )
+                asts.push(asteroids[i]);
+            else{
+                while(true)
+                
+                {
+                    if(asts.top()<0){
+                        asts.push(asteroids[i]);
+                        break;
+
+                    }
+                    else if(asts.top()>-asteroids[i])
+                        break;
+                    else if(asts.top()==-asteroids[i])
+                    {
+                        asts.pop();
+                        break;
+                    }
+                    else
+                    {
+                        asts.pop();
+                        if(asts.empty())
+                        {asts.push(asteroids[i]);
+                        break;}
+                                                                                                    
+                     
+                    }
+                }
+            }
+        }
+        
+        vector<int> res(asts.size());
+        for(int i=asts.size()-1;i>=0;i--){
+            res[i]=asts.top();
+            asts.pop();
+
+        }
+        return res;
+    }
+};
